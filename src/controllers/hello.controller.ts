@@ -10,6 +10,7 @@ import {
   Headers,
   UseFilters,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiResponse,
@@ -24,9 +25,12 @@ import { HelloService } from '../services/hello.service';
 import { Hello, UserRole } from '../classes/hello';
 import { CreateHelloDto } from '../dto/hello.dto';
 import { HttpExceptionFilter } from '../common/filters/http-exception.filter';
+import { Role } from '../common/decorators/role.decorators';
+import { RolesGuard } from '../common/guards/roles.guards';
 @ApiBearerAuth()
 @ApiTags('hello')
 @UseFilters(HttpExceptionFilter) //局部使用过滤器
+@UseGuards(RolesGuard)
 @Controller('/hello')
 export class HelloController {
   constructor(private readonly helloService: HelloService) {}
@@ -52,6 +56,7 @@ export class HelloController {
     return this.helloService.update(id, message);
   }
   @Delete()
+  @Role('admin') //使用守卫
   remove(@Query() { id }): string {
     console.log(`id:${id}`);
     return this.helloService.remove(id);
