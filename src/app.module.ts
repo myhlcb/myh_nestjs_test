@@ -1,8 +1,8 @@
 import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
-import { AppController } from './controllers/app.controller';
-import { AppService } from './services/app.service';
-import { HelloModule } from './modules/hello.module';
-import { CatModule } from './modules/cat.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { HelloModule } from './modules/hello/hello.module';
+import { CatModule } from './modules/cat/cat.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { StatusMonitorModule } from 'nest-status-monitor';
 import { ConfigModule, ConfigService } from 'nestjs-config';

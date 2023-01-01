@@ -5,9 +5,9 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { CatsService } from '../services/cat.service';
-import { CreateCatDto } from '../dto/cat.dto';
-import { Cat } from '../entities/cat.entity';
+import { CatsService } from './cat.service';
+import { CreateCatDto } from '../../dto/cat.dto';
+import { Cat } from '../../entities/cat.entity';
 
 @ApiBearerAuth()
 @ApiTags('cats')
