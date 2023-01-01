@@ -23,14 +23,20 @@
     "@nestjs-modules/mailer": "^1.8.1",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/jwt": "^10.0.1",
+    "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.1.4",
     "class-validator": "^0.14.0",
+    "lodash": "^4.17.21",
     "nest-status-monitor": "^0.1.4",
     "nestjs-config": "^1.4.10",
     "nodemailer": "^6.8.0",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "tslib": "^2.4.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
