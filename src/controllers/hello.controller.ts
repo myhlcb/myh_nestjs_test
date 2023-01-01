@@ -8,6 +8,7 @@ import {
   Body,
   Param,
   Headers,
+  UseFilters,
 } from '@nestjs/common';
 import {
   ApiResponse,
@@ -21,8 +22,10 @@ import {
 import { HelloService } from '../services/hello.service';
 import { Hello, UserRole } from '../classes/hello';
 import { CreateHelloDto } from '../dto/hello.dto';
+import { HttpExceptionFilter } from '../common/filters/http-exception.filter';
 @ApiBearerAuth()
 @ApiTags('hello')
+@UseFilters(HttpExceptionFilter) //局部使用过滤器
 @Controller('/hello')
 export class HelloController {
   constructor(private readonly helloService: HelloService) {}
