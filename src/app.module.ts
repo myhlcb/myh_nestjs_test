@@ -10,9 +10,15 @@ import { resolve } from 'path';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { AuthModule } from './modules/auth/auth.module';
 import statusConfig from './config/statusMonitor';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './modules/user/user.module';
 @Module({
   imports: [
     ConfigModule.load(resolve(__dirname, 'config', '**/!(*.d).{ts,js}')), //注入config
+    TypeOrmModule.forRootAsync({
+      useFactory: (config: ConfigService) => config.get('mysql'),
+      inject: [ConfigService],
+    }),
     StatusMonitorModule.setUp(statusConfig),
     // MailerModule.forRootAsync({
     //   useFactory: (config: ConfigService) => config.get('email'),
@@ -21,6 +27,7 @@ import statusConfig from './config/statusMonitor';
     HelloModule,
     CatModule,
     AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
