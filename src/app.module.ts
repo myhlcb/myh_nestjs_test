@@ -4,17 +4,19 @@ import { AppService } from './services/app.service';
 import { HelloModule } from './modules/hello.module';
 import { CatModule } from './modules/cat.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
-
+import { StatusMonitorModule } from 'nest-status-monitor';
 import { ConfigModule, ConfigService } from 'nestjs-config';
 import { resolve } from 'path';
 import { MailerModule } from '@nestjs-modules/mailer';
+import statusConfig from './config/statusMonitor';
 @Module({
   imports: [
-    // ConfigModule.load(resolve(__dirname,'config','xxx')), 注入config
-    MailerModule.forRootAsync({
-      // useFactory: (config: ConfigService) => config.get('email'),
-      // inject: [ConfigService],  //modules模块外部注入
-    }),
+    ConfigModule.load(resolve(__dirname, 'config', '**/!(*.d).{ts,js}')), //注入config
+    StatusMonitorModule.setUp(statusConfig),
+    // MailerModule.forRootAsync({
+    //   // useFactory: (config: ConfigService) => config.get('email'),
+    //   // inject: [ConfigService],  //modules模块外部注入
+    // }),
     HelloModule,
     CatModule,
   ],
