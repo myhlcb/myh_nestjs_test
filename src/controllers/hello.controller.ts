@@ -9,6 +9,7 @@ import {
   Param,
   Headers,
   UseFilters,
+  ParseIntPipe,
 } from '@nestjs/common';
 import {
   ApiResponse,
@@ -44,7 +45,9 @@ export class HelloController {
     return this.helloService.save(createHelloDto);
   }
   @Patch(':id')
-  update(@Param() { id }, @Body() { message }): string {
+  // 局部使用管道
+  update(@Param('id', new ParseIntPipe()) id, @Body() { message }): string {
+    console.log(id, typeof id, 1111111);
     console.log(`id:${id}`);
     return this.helloService.update(id, message);
   }
