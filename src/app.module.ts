@@ -15,8 +15,18 @@ import { UserModule } from './modules/user/user.module';
 @Module({
   imports: [
     ConfigModule.load(resolve(__dirname, 'config', '**/!(*.d).{ts,js}')), //注入config
+    // TypeOrmModule.forRootAsync({
+    //   type: 'mysql',
+    //   host: 'localhost',
+    //   port: 3307,
+    //   username: 'nest',
+    //   password: '123456',
+    //   database: 'typeorm',
+    //   entities: [path.join('./entity/*.entity{.ts,.js}')],
+    //   synchronize: true,
+    // }),
     TypeOrmModule.forRootAsync({
-      useFactory: (config: ConfigService) => config.get('mysql'),
+      useFactory: (config: ConfigService) => config.get('database'),
       inject: [ConfigService],
     }),
     StatusMonitorModule.setUp(statusConfig),
